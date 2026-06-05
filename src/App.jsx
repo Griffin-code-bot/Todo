@@ -56,8 +56,18 @@ if ( id == item.id){
     }
 
 
-
-
+function editTodo(id, newText){
+      
+ const editedTodo =todos.map(item => {
+        if (id == item.id) return {
+       ...item, text: newText
+      
+ }
+     return item ;
+     })
+      setTodos(editedTodo)
+     
+}
 
 
 
@@ -219,7 +229,12 @@ return todo.id === id ?
 	{todo.completed ? " ✅" : " ❌"}
 	<button onClick={()=>deleteTodo(index)}>Delete</button>
         <button onClick={()=> toggleTodo(todo.id)}>Toggle</button>
-	</li> )} 
+	<button onClick={()=>{
+        const newText = prompt("Enter text")
+         if (newText === null) return;
+          editTodo(todo.id,newText)  }}
+        > Edit </button>
+        </li> )} 
           </ul>
 
 
