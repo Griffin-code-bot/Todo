@@ -7,24 +7,78 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
   const [task, setTask] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState( [{
+         id:1,
+         text:"HTML",
+         completed:false,
+	},
+        {
+	 id:2,
+         text:"CSS",
+         completed:false        
+         } 
+       ]
+      )
+
 
 function addTodo() {
    if(task.trim() === "") return;
-	setTodos([...todos, task])
-       setTask("")
+      const newTodo = {
+          id: Date.now(),
+	  text: task,
+	  completed: false
 
-}  
+	}	
+      setTodos([...todos, newTodo])
+        setTask("")
+
+} 
 
 function deleteTodo(indexToDelete){
 const newTodos=todos.filter(
 (_, index) => index!==indexToDelete
  )
 setTodos(newTodos)
- }    
+ }
+
+
+function toggleTodo(id) {
+  const updatedTodo =todos.map(item => {
+if ( id == item.id){
+    return {
+    ...item,completed:!item.completed
+          }
+      }
+ return item;
+     })
+
+   setTodos(updatedTodo)
+    }
 
 
 
+
+
+
+
+
+
+    
+
+{/*
+function toggleTodo(id) {
+   setTodos( todos.map(todo=>{
+return todo.id === id ? 
+{ ...todo, completed: !todo.completed }:todo
+
+})
+)}
+
+*/}
+
+
+
+   
   return (
     <>
       <section id="center">
@@ -148,11 +202,11 @@ setTodos(newTodos)
         <li>Unique IDs 🆔</li>
         <li>Due dates 📅</li>
         <li>Priority 🔥</li>
-
+      {/* <li>Date.now()</li> */}
 
 
 	</ul>
-
+      
       <input type="text" 
       value={task}
       onChange={(e) => setTask(e.target.value)}
@@ -160,9 +214,11 @@ setTodos(newTodos)
       <button onClick={addTodo}>Add</button>
 
      <ul>
-       {todos.map(( list, index) =>
- 	<li key={index}>{list}
+       {todos.map(( todo,index) =>
+	<li key={todo.id}>{todo.text}
+	{todo.completed ? " ✅" : " ❌"}
 	<button onClick={()=>deleteTodo(index)}>Delete</button>
+        <button onClick={()=> toggleTodo(todo.id)}>Toggle</button>
 	</li> )} 
           </ul>
 
