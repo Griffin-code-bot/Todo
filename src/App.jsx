@@ -3,6 +3,14 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
+import TodoItem from '../components/TodoItem.jsx'
+import TodoList from '../components/TodoList.jsx'
+
+     function Name(props) {
+      return <h1>{props.name}</h1>
+
+
+      }
 
 function App() {
   const [count, setCount] = useState(0)
@@ -10,7 +18,7 @@ function App() {
   const [todos, setTodos] = useState( [{
          id:1,
          text:"HTML",
-         completed:false,
+         completed:true,
 	},
         {
 	 id:2,
@@ -34,9 +42,9 @@ function addTodo() {
 
 } 
 
-function deleteTodo(indexToDelete){
+function deleteTodo(idToDelete){
 const newTodos=todos.filter(
-(_, index) => index!==indexToDelete
+(todo) => todo.id!==idToDelete
  )
 setTodos(newTodos)
  }
@@ -201,6 +209,25 @@ return todo.id === id ?
 <div>
       <h1>Todo App</h1>
 	<ul>
+Components
+
+✅ Props
+
+✅ Passing objects as props
+
+✅ Passing functions as props
+
+✅ Parent owns state
+
+✅ Child calls parent functions
+
+✅ Add
+
+✅ Delete
+
+✅ Edit
+
+✅ Toggle
 	
 
 	<li>Add todo ✅</li>
@@ -212,8 +239,12 @@ return todo.id === id ?
         <li>Unique IDs 🆔</li>
         <li>Due dates 📅</li>
         <li>Priority 🔥</li>
-      {/* <li>Date.now()</li> */}
+       <li>{Date.now()}</li> 
+     <Name name="Shubham" />
+     <Name name="Amit" />
+     <Name name="Priya" />
 
+    
 
 	</ul>
       
@@ -222,10 +253,26 @@ return todo.id === id ?
       onChange={(e) => setTask(e.target.value)}
 />
       <button onClick={addTodo}>Add</button>
+ 
+   
+     
+         
+      <TodoList 
+      todos={todos} 
+      editTodo={editTodo}
+      toggleTodo={toggleTodo}
+      deleteTodo={deleteTodo} 
+      />
+               
+    
 
-     <ul>
-       {todos.map(( todo,index) =>
-	<li key={todo.id}>{todo.text}
+    
+
+             
+       
+
+       {/*
+        <li key={todo.id}>{todo.text}</li>
 	{todo.completed ? " ✅" : " ❌"}
 	<button onClick={()=>deleteTodo(index)}>Delete</button>
         <button onClick={()=> toggleTodo(todo.id)}>Toggle</button>
@@ -234,9 +281,13 @@ return todo.id === id ?
          if (newText === null) return;
           editTodo(todo.id,newText)  }}
         > Edit </button>
-        </li> )} 
-          </ul>
-
+         */}
+            
+             
+           
+      
+        
+        
 
 
     </div>
