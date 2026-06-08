@@ -24,7 +24,12 @@ function App() {
 	 id:2,
          text:"CSS",
          completed:false        
-         } 
+         }, 
+         {
+         id:3,
+         text:"JS",
+         completed:true
+         }
        ]
       )
 
@@ -79,26 +84,82 @@ function editTodo(id, newText){
 
 
 
-
-
-    
-
-{/*
-function toggleTodo(id) {
-   setTodos( todos.map(todo=>{
-return todo.id === id ? 
-{ ...todo, completed: !todo.completed }:todo
-
-})
-)}
-
-*/}
-
-
-
-   
+         const remainingTodos= todos.filter(
+         (todo) => todo.completed !== true
+          ).length
   return (
     <>
+      <div>
+      <h1>Todo App</h1>
+	<ul>
+Components
+
+✅ Props
+
+✅ Passing objects as props
+
+✅ Passing functions as props
+✅ Parent owns state
+
+✅ Child calls parent functions
+
+✅ Add
+
+✅ Delete
+
+✅ Edit
+
+✅ Toggle
+	
+
+	<li>Add todo ✅</li>
+	<li>Show todos ✅</li>
+	<li>Delete todo ✅</li>
+
+	<li>Mark complete ✅</li>
+        <li>Edit text ✏️</li>
+        <li>Unique IDs 🆔</li>
+        <li>Due dates 📅</li>
+        <li>Priority 🔥</li>
+       <li>{Date.now()}</li> 
+     <Name name="Shubham" />
+     <Name name="Amit" />
+     <Name name="Priya" />
+      
+    
+    <p>Remaining todos:{remainingTodos}</p>
+	</ul>
+      
+      <input type="text" 
+      value={task}
+      onChange={(e) => setTask(e.target.value)}
+/>
+      <button onClick={addTodo}>Add</button>
+      <TodoList 
+      todos={todos} 
+      editTodo={editTodo}
+      toggleTodo={toggleTodo}
+      deleteTodo={deleteTodo} 
+      />
+              
+    </div>
+
+ </>
+  )
+}
+
+export default App
+
+
+
+
+
+
+
+{/*
+  <div className="ticks"></div>
+      <section id="spacer"></section>
+<div>
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
@@ -202,74 +263,9 @@ return todo.id === id ?
           </ul>
         </div>
       </section>
+*/}
+  
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-   
-<div>
-      <h1>Todo App</h1>
-	<ul>
-Components
-
-✅ Props
-
-✅ Passing objects as props
-
-✅ Passing functions as props
-
-✅ Parent owns state
-
-✅ Child calls parent functions
-
-✅ Add
-
-✅ Delete
-
-✅ Edit
-
-✅ Toggle
-	
-
-	<li>Add todo ✅</li>
-	<li>Show todos ✅</li>
-	<li>Delete todo ✅</li>
-
-	<li>Mark complete ✅</li>
-        <li>Edit text ✏️</li>
-        <li>Unique IDs 🆔</li>
-        <li>Due dates 📅</li>
-        <li>Priority 🔥</li>
-       <li>{Date.now()}</li> 
-     <Name name="Shubham" />
-     <Name name="Amit" />
-     <Name name="Priya" />
-
-    
-
-	</ul>
-      
-      <input type="text" 
-      value={task}
-      onChange={(e) => setTask(e.target.value)}
-/>
-      <button onClick={addTodo}>Add</button>
- 
-   
-     
-         
-      <TodoList 
-      todos={todos} 
-      editTodo={editTodo}
-      toggleTodo={toggleTodo}
-      deleteTodo={deleteTodo} 
-      />
-               
-    
-
-    
-
-             
-       
 
        {/*
         <li key={todo.id}>{todo.text}</li>
@@ -283,17 +279,32 @@ Components
         > Edit </button>
          */}
             
-             
-           
-      
-        
-        
 
 
-    </div>
+{/*
 
- </>
-  )
+function remainingTodo() {
+const remainingTodos= todos.filter(
+(todo) => todo.completed !== true
+).length
+
+
+  setTodos(remainingTodos)
 }
 
-export default App
+*/}
+    
+
+{/*
+function toggleTodo(id) {
+   setTodos( todos.map(todo=>{
+return todo.id === id ? 
+{ ...todo, completed: !todo.completed }:todo
+
+})
+)}
+
+*/}
+
+
+
