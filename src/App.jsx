@@ -87,6 +87,20 @@ function editTodo(id, newText){
          const remainingTodos= todos.filter(
          (todo) => todo.completed !== true
           ).length
+
+function clearCompleted() {
+   const remainingTodos= todos.filter(
+         (todo) => todo.completed !== true
+          )
+   setTodos(remainingTodos)
+
+}
+
+
+
+
+
+
   return (
     <>
       <div>
@@ -125,8 +139,8 @@ Components
      <Name name="Shubham" />
      <Name name="Amit" />
      <Name name="Priya" />
-      
-    
+         
+    <button onClick={clearCompleted}>Clear todo </button> 
     <p>Remaining todos:{remainingTodos}</p>
 	</ul>
       
