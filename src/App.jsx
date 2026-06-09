@@ -140,7 +140,7 @@ Components
      <Name name="Amit" />
      <Name name="Priya" />
          
-    <button onClick={clearCompleted}>Clear todo </button> 
+    <button onClick={clearCompleted}>Clear complete </button> 
     <p>Remaining todos:{remainingTodos}</p>
 	</ul>
       
