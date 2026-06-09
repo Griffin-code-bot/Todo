@@ -4,10 +4,13 @@
      return (
           <>
        <li>
-         <h1>Hello World,this is of Todoitem </h1>
+         
         <h2>{props.todo.text}</h2>
-        <h3>this if of com{props.todo.completed.toString()}</h3>
+   
+{/*
+     <h3>this if of com{props.todo.completed.toString()}</h3>
      <pre>{JSON.stringify(props, null, 2)}</pre>
+*/}
         {props.todo.completed ? "✅" :" ❌"}        
 
   

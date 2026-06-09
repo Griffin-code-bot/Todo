@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -15,22 +15,15 @@ import TodoList from '../components/TodoList.jsx'
 function App() {
   const [count, setCount] = useState(0)
   const [task, setTask] = useState("");
-  const [todos, setTodos] = useState( [{
-         id:1,
-         text:"HTML",
-         completed:true,
-	},
-        {
-	 id:2,
-         text:"CSS",
-         completed:false        
-         }, 
-         {
-         id:3,
-         text:"JS",
-         completed:true
-         }
-       ]
+  const [todos, setTodos] = useState( ()=> {
+const data = localStorage.getItem("todos")
+
+  if (data) {
+    return JSON.parse(data)
+  }
+
+  return []
+}
       )
 
 
@@ -96,9 +89,30 @@ function clearCompleted() {
 
 }
 
+{/*
+useEffect( ()=> {
+
+    const data = localStorage.getItem("todos")
+
+     if(data) {
+         setTodos(JSON.parse(data))
+        }
+
+     }
+     ,[] )
+*/}
 
 
+   useEffect( ()=> {
+     
+       localStorage.setItem("todos",
+        JSON.stringify(todos) 
+        )
+    }
+    ,[todos])
 
+
+    
 
 
   return (
@@ -139,8 +153,10 @@ Components
      <Name name="Shubham" />
      <Name name="Amit" />
      <Name name="Priya" />
-         
-    <button onClick={clearCompleted}>Clear complete </button> 
+{/* 
+   <p>{JSON.stringify(todos)}</p>      
+*/}   
+ <button onClick={clearCompleted}>Clear complete </button> 
     <p>Remaining todos:{remainingTodos}</p>
 	</ul>
       
@@ -321,4 +337,19 @@ return todo.id === id ?
 */}
 
 
-
+{/*
+        id:1,
+         text:"HTML",
+         completed:true,
+        },
+        {
+         id:2,
+         text:"CSS",
+         completed:false
+         },
+         {
+         id:3,
+         text:"JS",
+         completed:true
+         }
+*/}
