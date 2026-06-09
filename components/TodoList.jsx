@@ -5,9 +5,11 @@ export default function TodoList(props) {
 
  return (
           <>
+{/*
 <p>{String(Array.isArray(props.todos))}</p>
  <p>{JSON.stringify(props)}</p>
-         {/*  <TodoItem todo={{text:"test todo"}} />*/}
+*/}   
+      {/*  <TodoItem todo={{text:"test todo"}} />*/}
 
 
          { props.todos.map(todo => (
