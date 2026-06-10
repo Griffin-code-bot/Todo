@@ -121,24 +121,7 @@ useEffect( ()=> {
     ,[todos])
 
 
-    let displayedTodos
-
-if (filter ==="all") {
-displayedTodos = todos
-
-}
-
- if(filter === "active") {
-displayedTodos =todos.filter(
-  todo => !todo.completed 
-)
-}
- if (filter === "completed") {
-displayedTodos =todos.filter(
-  todo => todo.completed
-)
-
-}
+    
 
 
   return (
@@ -146,9 +129,9 @@ displayedTodos =todos.filter(
       <div>
       <h1>Todo App</h1>
 
-     <button onClick={()=> setFilter("all") }>All </button>
-     <button onClick={()=> setFilter("active")}>Active</button>
-     <button onClick={()=> setFilter("completed")}>Completed</button>
+     <button>All </button>
+     <button>Active</button>
+     <button>Completed</button
 
 
 	<ul>
@@ -211,7 +194,7 @@ Components
 />
       <button onClick={addTodo}>Add</button>
       <TodoList 
-      todos={displayedTodos} 
+      todos={todos} 
       editTodo={editTodo}
       toggleTodo={toggleTodo}
       deleteTodo={deleteTodo} 
