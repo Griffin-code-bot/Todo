@@ -5,9 +5,10 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import TodoItem from '../components/TodoItem.jsx'
 import TodoList from '../components/TodoList.jsx'
-  
+import Weather from '../components/Weather.jsx'
 
 {/*
+import Weather from '../components/Weather.jsx'
      function Name(props) {
       return <h1>{props.name}</h1>
 
@@ -144,6 +145,8 @@ displayedTodos =todos.filter(
   return (
     <>
       <div>
+     <Weather />
+     
       <h1>Todo App</h1>
 
      <button onClick={()=> setFilter("all") }>All </button>
@@ -216,7 +219,14 @@ Components
       toggleTodo={toggleTodo}
       deleteTodo={deleteTodo} 
       />
-              
+   
+   <footer> Built with ❤️ 
+   <a href='https://github.com/Griffin-code-bot'
+    style= {{textDecoration: 'none', color: 'white'}}
+    >
+     by Shubham  
+  </a>
+  </footer>      
     </div>
 
  </>
@@ -232,6 +242,9 @@ export default App
 
 
 {/*
+
+    <p>Built with ❤️ </p>
+   
   <div className="ticks"></div>
       <section id="spacer"></section>
 <div>
