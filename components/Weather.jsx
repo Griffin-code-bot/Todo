@@ -17,14 +17,17 @@ export default function Weather() {
     }
      getUser();
   }, []);
+  
+  if (error) {
+    return <p>{error}</p>;
+  }
+
 
   if (weather === null) {
     return <p>Loading weather...</p>;
   }
 
-  if (error) {
-    return <p>{error}</p>;
-  }
+ 
 
   return (
     <div>
@@ -32,6 +35,10 @@ export default function Weather() {
       <h2> Weather</h2>
       <p> Temperature: 35 degree celsius</p>
       <p>Condition: Sunny </p>
-    </div>
+ 	<p>Login: {weather.login}</p>
+	<p>ID: {weather.id}</p>
+	<p>Node ID: {weather.node_id}</p> 
+        <p>Followers: {weather.followers}</p>
+   </div>
   );
 }
