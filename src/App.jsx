@@ -1,105 +1,88 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
-import TodoItem from '../components/TodoItem.jsx'
-import TodoList from '../components/TodoList.jsx'
-import Weather from '../components/Weather.jsx'
+import { useState, useEffect } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "./assets/vite.svg";
+import heroImg from "./assets/hero.png";
+import "./App.css";
+import TodoItem from "../components/TodoItem.jsx";
+import TodoList from "../components/TodoList.jsx";
+import Weather from "../components/Weather.jsx";
 
-{/*
+{
+  /*
 import Weather from '../components/Weather.jsx'
      function Name(props) {
       return <h1>{props.name}</h1>
 
 }
-*/}
-
-      
+*/
+}
 
 function App() {
-
-  const [filter, setFilter] = useState("all")
-  const [count, setCount] = useState(0)
+  const [filter, setFilter] = useState("all");
+  const [count, setCount] = useState(0);
   const [task, setTask] = useState("");
 
+  const [todos, setTodos] = useState(() => {
+    const data = localStorage.getItem("todos");
 
-
-  const [todos, setTodos] = useState( ()=> {
-const data = localStorage.getItem("todos")
-
-  if (data) {
-    return JSON.parse(data)
-  }
-
-  return []
-}
-      )
-
-
-function addTodo() {
-   if(task.trim() === "") return;
-      const newTodo = {
-          id: Date.now(),
-	  text: task,
-	  completed: false
-
-	}	
-      setTodos([...todos, newTodo])
-        setTask("")
-
-} 
-
-function deleteTodo(idToDelete){
-const newTodos=todos.filter(
-(todo) => todo.id!==idToDelete
- )
-setTodos(newTodos)
- }
-
-
-function toggleTodo(id) {
-  const updatedTodo =todos.map(item => {
-if ( id == item.id){
-    return {
-    ...item,completed:!item.completed
-          }
-      }
- return item;
-     })
-
-   setTodos(updatedTodo)
+    if (data) {
+      return JSON.parse(data);
     }
 
+    return [];
+  });
 
-function editTodo(id, newText){
-      
- const editedTodo =todos.map(item => {
-        if (id == item.id) return {
-       ...item, text: newText
-      
- }
-     return item ;
-     })
-      setTodos(editedTodo)
-     
-}
+  function addTodo() {
+    if (task.trim() === "") return;
+    const newTodo = {
+      id: Date.now(),
+      text: task,
+      completed: false,
+    };
+    setTodos([...todos, newTodo]);
+    setTask("");
+  }
 
+  function deleteTodo(idToDelete) {
+    const newTodos = todos.filter((todo) => todo.id !== idToDelete);
+    setTodos(newTodos);
+  }
 
+  function toggleTodo(id) {
+    const updatedTodo = todos.map((item) => {
+      if (id == item.id) {
+        return {
+          ...item,
+          completed: !item.completed,
+        };
+      }
+      return item;
+    });
 
-         const remainingTodos= todos.filter(
-         (todo) => todo.completed !== true
-          ).length
+    setTodos(updatedTodo);
+  }
 
-function clearCompleted() {
-   const remainingTodos= todos.filter(
-         (todo) => todo.completed !== true
-          )
-   setTodos(remainingTodos)
+  function editTodo(id, newText) {
+    const editedTodo = todos.map((item) => {
+      if (id == item.id)
+        return {
+          ...item,
+          text: newText,
+        };
+      return item;
+    });
+    setTodos(editedTodo);
+  }
 
-}
+  const remainingTodos = todos.filter((todo) => todo.completed !== true).length;
 
-{/*
+  function clearCompleted() {
+    const remainingTodos = todos.filter((todo) => todo.completed !== true);
+    setTodos(remainingTodos);
+  }
+
+  {
+    /*
 useEffect( ()=> {
 
     const data = localStorage.getItem("todos")
@@ -110,141 +93,94 @@ useEffect( ()=> {
 
      }
      ,[] )
-*/}
+*/
+  }
 
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
-   useEffect( ()=> {
-     
-       localStorage.setItem("todos",
-        JSON.stringify(todos) 
-        )
-    }
-    ,[todos])
+  let displayedTodos;
 
+  if (filter === "all") {
+    displayedTodos = todos;
+  }
 
-    let displayedTodos
-
-if (filter ==="all") {
-displayedTodos = todos
-
-}
-
- if(filter === "active") {
-displayedTodos =todos.filter(
-  todo => !todo.completed 
-)
-}
- if (filter === "completed") {
-displayedTodos =todos.filter(
-  todo => todo.completed
-)
-
-}
-
-
-
-
+  if (filter === "active") {
+    displayedTodos = todos.filter((todo) => !todo.completed);
+  }
+  if (filter === "completed") {
+    displayedTodos = todos.filter((todo) => todo.completed);
+  }
 
   return (
     <>
       <div>
-     <Weather />
-     
-      <h1>Todo App</h1>
+        <Weather />
 
-     <button onClick={()=> setFilter("all") }>All </button>
-     <button onClick={()=> setFilter("active")}>Active</button>
-     <button onClick={()=> setFilter("completed")}>Completed</button>
+        <h1>Todo App</h1>
 
+        <button onClick={() => setFilter("all")}>All </button>
+        <button onClick={() => setFilter("active")}>Active</button>
+        <button onClick={() => setFilter("completed")}>Completed</button>
 
-	<ul>
-Components
-
-✅ Props
-
-✅ Passing objects as props
-
-✅ Passing functions as props
-✅ Parent owns state
-
-✅ Child calls parent functions
-
-✅ Add
-
-✅ Delete
-
-✅ Edit
-
-✅ Toggle
-	
-
-	<li>Add todo ✅</li>
-	<li>Show todos ✅</li>
-	<li>Delete todo ✅</li>
-
-	<li>Mark complete ✅</li>
-        <li>Edit text ✏️</li>
-        <li>Unique IDs 🆔</li>
-        <li>Due dates 📅</li>
-        <li>Priority 🔥</li>
-       <li>{Date.now()}</li>
-
-     
-    </ul>
-{/* 
+        <ul>
+          Components ✅ Props ✅ Passing objects as props ✅ Passing functions
+          as props ✅ Parent owns state ✅ Child calls parent functions ✅ Add
+          ✅ Delete ✅ Edit ✅ Toggle
+          <li>Add todo ✅</li>
+          <li>Show todos ✅</li>
+          <li>Delete todo ✅</li>
+          <li>Mark complete ✅</li>
+          <li>Edit text ✏️</li>
+          <li>Unique IDs 🆔</li>
+          <li>Due dates 📅</li>
+          <li>Priority 🔥</li>
+          <li>{Date.now()}</li>
+        </ul>
+        {/* 
    <Name name="Shubham" />
      <Name name="Amit" />
      <Name name="Priya" />
    <p>{JSON.stringify(todos)}</p>      
-*/}   
+*/}
 
-    
+        <button onClick={clearCompleted}>Clear complete</button>
+        <p>Current filter:{filter}</p>
+        <p>Remaining todos:{remainingTodos}</p>
 
- <button onClick={clearCompleted}>Clear complete</button> 
-    <p>Current filter:{filter}</p>
-    <p>Remaining todos:{remainingTodos}</p>
+        <input
+          type="text"
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+        />
+        <button onClick={addTodo}>Add</button>
+        <TodoList
+          todos={displayedTodos}
+          editTodo={editTodo}
+          toggleTodo={toggleTodo}
+          deleteTodo={deleteTodo}
+        />
 
-
-
-	       
-
-    
-
-  
-      <input type="text" 
-      value={task}
-      onChange={(e) => setTask(e.target.value)}
-/>
-      <button onClick={addTodo}>Add</button>
-      <TodoList 
-      todos={displayedTodos} 
-      editTodo={editTodo}
-      toggleTodo={toggleTodo}
-      deleteTodo={deleteTodo} 
-      />
-   
-   <footer> Built with ❤️ 
-   <a href='https://github.com/Griffin-code-bot'
-    style= {{textDecoration: 'none', color: 'white'}}
-    >
-     by Shubham  
-  </a>
-  </footer>      
-    </div>
-
- </>
-  )
+        <footer>
+          {" "}
+          Built with ❤️
+          <a
+            href="https://github.com/Griffin-code-bot"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            by Shubham
+          </a>
+        </footer>
+      </div>
+    </>
+  );
 }
 
-export default App
+export default App;
 
-
-
-
-
-
-
-{/*
+{
+  /*
 
     <p>Built with ❤️ </p>
    
@@ -354,11 +290,11 @@ export default App
           </ul>
         </div>
       </section>
-*/}
-  
+*/
+}
 
-
-       {/*
+{
+  /*
         <li key={todo.id}>{todo.text}</li>
 	{todo.completed ? " ✅" : " ❌"}
 	<button onClick={()=>deleteTodo(index)}>Delete</button>
@@ -368,11 +304,11 @@ export default App
          if (newText === null) return;
           editTodo(todo.id,newText)  }}
         > Edit </button>
-         */}
-            
+         */
+}
 
-
-{/*
+{
+  /*
 
 function remainingTodo() {
 const remainingTodos= todos.filter(
@@ -383,10 +319,11 @@ const remainingTodos= todos.filter(
   setTodos(remainingTodos)
 }
 
-*/}
-    
+*/
+}
 
-{/*
+{
+  /*
 function toggleTodo(id) {
    setTodos( todos.map(todo=>{
 return todo.id === id ? 
@@ -395,10 +332,11 @@ return todo.id === id ?
 })
 )}
 
-*/}
+*/
+}
 
-
-{/*
+{
+  /*
         id:1,
          text:"HTML",
          completed:true,
@@ -413,4 +351,5 @@ return todo.id === id ?
          text:"JS",
          completed:true
          }
-*/}
+*/
+}
