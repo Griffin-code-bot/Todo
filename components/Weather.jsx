@@ -10,14 +10,15 @@ export default function Weather() {
         const response = await fetch("https://api.github.com/users/octocat");
         const data = await response.json();
         setWeather(data);
-        getUser();
+        
       } catch (error) {
         setError("Failed to load data");
       }
     }
+     getUser();
   }, []);
 
-  if (weather == null) {
+  if (weather === null) {
     return <p>Loading weather...</p>;
   }
 
