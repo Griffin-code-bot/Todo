@@ -4,8 +4,11 @@
   
       const [weather, setWeather] = useState(null)
 
+            
+
       useEffect( ()=> {
        
+	
         async function getUser() {
         const response =await fetch('https://api.github.com/users/octocat')
         const data = await response.json()
@@ -18,7 +21,9 @@
       }
        ,[])
 
-
+ 	if(weather == null) {
+        return (<p>Loading weather...</p>)
+        }
     
       return(
         <div>
