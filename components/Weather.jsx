@@ -4,22 +4,33 @@ export default function Weather() {
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    async function getUser() {
+async function getUser() {
       try {
-        const response = await fetch("https://api.github.com/users/octocat");
-        const data = await response.json();
+setError(null);
+ let url="https://api.open-meteo.com/v1/forecast?latitude=23.26&longitude=77.41&current=temperature_2m,relative_humidity_2m"
+        const response = await fetch(url)
+       const data = await response.json();
         setWeather(data);
-        
+
       } catch (error) {
-        setError("Failed to load data");
+        setError(error.message);
       }
     }
-     getUser();
-  }, []);
+
+  useEffect(() => {
+     getUser()    
+ }   
+  , []);
+
+
   
   if (error) {
-    return <p>{error}</p>;
+    return(
+     <div>
+     <p>{error}</p>
+     <button onClick={getUser}>Retry </button>
+     </div>
+     )
   }
 
 
@@ -33,12 +44,10 @@ export default function Weather() {
     <div>
       <pre>{JSON.stringify(weather, null, 2)}</pre>
       <h2> Weather</h2>
-      <p> Temperature: 35 degree celsius</p>
+      <p> Temperature: {weather.current.temperature_2m}</p>
       <p>Condition: Sunny </p>
- 	<p>Login: {weather.login}</p>
-	<p>ID: {weather.id}</p>
-	<p>Node ID: {weather.node_id}</p> 
-        <p>Followers: {weather.followers}</p>
+      <p>Humidity:{weather.current.relative_humidity_2m}</p>
    </div>
   );
 }
+
