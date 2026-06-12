@@ -114,12 +114,6 @@ useEffect( ()=> {
   if (filter === "completed") {
     displayedTodos = todos.filter((todo) => todo.completed);
   }
-  
-  displayedTodos= displayedTodos.filter(
-  todo => todo.text.includes(search)
- )  
-
-
 
   return (
     <>
@@ -131,9 +125,11 @@ useEffect( ()=> {
         <button onClick={() => setFilter("all")}>All </button>
         <button onClick={() => setFilter("active")}>Active</button>
         <button onClick={() => setFilter("completed")}>Completed</button>
-        <input type="text" placeholder="Search todos..."
+        <input type="text"
+         placeholder="Search todos..."
         value={search}
-        onChange={ (event)=> setSearch(event.target.value)}
+        onChange={ (event)=> 
+        setSearch(event.target.value)}
 
          />
          <p>{search}</p>
