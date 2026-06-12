@@ -22,7 +22,15 @@ function App() {
   const [count, setCount] = useState(0);
   const [task, setTask] = useState("");
   const [search, setSearch] = useState("");
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState( ()=> {
+  const savedTheme = localStorage.getItem("theme")
+
+if (savedTheme) {
+return savedTheme
+
+}
+ return "dark"
+});
 
   const [todos, setTodos] = useState(() => {
     const data = localStorage.getItem("todos");
@@ -101,6 +109,13 @@ useEffect( ()=> {
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
+
+  useEffect( () => {
+   localStorage.setItem("theme", theme)
+}, [theme]);
+
+
+
 
   let displayedTodos;
 
