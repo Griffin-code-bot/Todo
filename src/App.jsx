@@ -22,7 +22,7 @@ function App() {
   const [count, setCount] = useState(0);
   const [task, setTask] = useState("");
   const [search, setSearch] = useState("");
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
 
   const [todos, setTodos] = useState(() => {
     const data = localStorage.getItem("todos");
