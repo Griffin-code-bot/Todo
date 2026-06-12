@@ -21,8 +21,8 @@ function App() {
   const [filter, setFilter] = useState("all");
   const [count, setCount] = useState(0);
   const [task, setTask] = useState("");
-  const [search, setSearch] = useState("")
-
+  const [search, setSearch] = useState("");
+  const [theme, setTheme] = useState("light");
 
   const [todos, setTodos] = useState(() => {
     const data = localStorage.getItem("todos");
@@ -114,29 +114,34 @@ useEffect( ()=> {
   if (filter === "completed") {
     displayedTodos = todos.filter((todo) => todo.completed);
   }
-  
-  displayedTodos= displayedTodos.filter(
-  todo => todo.text.includes(search)
- )  
 
-
+  displayedTodos = displayedTodos.filter((todo) => todo.text.includes(search));
 
   return (
     <>
-      <div>
+      <div className={theme}>
         <Weather />
 
         <h1>Todo App</h1>
 
+        <button
+          onClick={() =>
+            theme == "light" ? setTheme("dark") : setTheme("light")
+          }
+        >
+          Toggle Theme
+        </button>
+        <p>{theme} </p>
         <button onClick={() => setFilter("all")}>All </button>
         <button onClick={() => setFilter("active")}>Active</button>
         <button onClick={() => setFilter("completed")}>Completed</button>
-        <input type="text" placeholder="Search todos..."
-        value={search}
-        onChange={ (event)=> setSearch(event.target.value)}
-
-         />
-         <p>{search}</p>
+        <input
+          type="text"
+          placeholder="Search todos..."
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+        />
+        <p>{search}</p>
         <ul>
           Components ✅ Props ✅ Passing objects as props ✅ Passing functions
           as props ✅ Parent owns state ✅ Child calls parent functions ✅ Add
