@@ -125,3 +125,19 @@ code {
   background-color: black;
   color: white;
 }
+
+.coding {
+  color: blue;
+}
+
+.fitness {
+  color: green;
+}
+
+.life {
+  color: orange;
+}
+
+.misc {
+  color: brown;
+}

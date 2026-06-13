@@ -1,10 +1,14 @@
+import "../src/index.css" 
+
 export default function TodoItem(props) {
   return (
     <>
       <li>
         {props.todo.text}
+      <span className={props.todo.category}>
         [{props.todo.category}]
-        {/*
+      </span>       
+ {/*
      <h3>this if of com{props.todo.completed.toString()}</h3>
      <pre>{JSON.stringify(props, null, 2)}</pre>
 */}
