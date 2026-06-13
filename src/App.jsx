@@ -131,6 +131,14 @@ useEffect( ()=> {
   }
 
   displayedTodos = displayedTodos.filter((todo) => todo.text.includes(search));
+  
+  const totalTodos = todos.length
+  const completedTodos = todos.filter(
+  todo => todo.completed).length
+  const activeTodos = todos.filter(
+  todo => !todo.completed).length
+
+
 
   return (
     <>
@@ -177,7 +185,9 @@ useEffect( ()=> {
      <Name name="Priya" />
    <p>{JSON.stringify(todos)}</p>      
 */}
-
+        <p>Total:{totalTodos}</p>
+        <p>Completed: {completedTodos}</p>
+        <p>Active: {activeTodos}</p>
         <button onClick={clearCompleted}>Clear complete</button>
         <p>Current filter:{filter}</p>
         <p>Remaining todos:{remainingTodos}</p>
