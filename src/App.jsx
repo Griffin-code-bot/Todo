@@ -138,7 +138,8 @@ useEffect( ()=> {
   const activeTodos = todos.filter(
   todo => !todo.completed).length
 
-
+  const completionRate = totalTodos === 0 ? 0 :  
+  (completedTodos/totalTodos)*100 
 
   return (
     <>
@@ -188,6 +189,7 @@ useEffect( ()=> {
         <p>Total:{totalTodos}</p>
         <p>Completed: {completedTodos}</p>
         <p>Active: {activeTodos}</p>
+        <p>Completion: {completionRate.toFixed(1)}% </p>
         <button onClick={clearCompleted}>Clear complete</button>
         <p>Current filter:{filter}</p>
         <p>Remaining todos:{remainingTodos}</p>
