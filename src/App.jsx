@@ -22,6 +22,7 @@ function App() {
   const [count, setCount] = useState(0);
   const [task, setTask] = useState("");
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("coding");
   const [theme, setTheme] = useState( ()=> {
   const savedTheme = localStorage.getItem("theme")
 
@@ -48,6 +49,7 @@ return savedTheme
       id: Date.now(),
       text: task,
       completed: false,
+      category:category
     };
     setTodos([...todos, newTodo]);
     setTask("");
@@ -147,7 +149,7 @@ useEffect( ()=> {
         <Weather />
 
         <h1>Todo App</h1>
-
+        
         <button
           onClick={() =>
             theme == "light" ? setTheme("dark") : setTheme("light")
@@ -186,6 +188,9 @@ useEffect( ()=> {
      <Name name="Priya" />
    <p>{JSON.stringify(todos)}</p>      
 */}
+     <pre>
+     {JSON.stringify(todos, null, 2)}
+     </pre>
         <p>Total:{totalTodos}</p>
         <p>Completed: {completedTodos}</p>
         <p>Active: {activeTodos}</p>
@@ -193,12 +198,23 @@ useEffect( ()=> {
         <button onClick={clearCompleted}>Clear complete</button>
         <p>Current filter:{filter}</p>
         <p>Remaining todos:{remainingTodos}</p>
-
+        <p>{category}</p>
         <input
           type="text"
           value={task}
           onChange={(e) => setTask(e.target.value)}
         />
+         <select
+           value={category}
+           onChange= {(e) => setCategory(e.target.value)}
+
+	 >
+        <option value="coding">Coding</option>
+        <option value="fitness">Fitness</option>
+        <option value="life">Life</option>
+        <option value="misc">Miscellanous</option>
+        </select>
+ 
         <button onClick={addTodo}>Add</button>
         <TodoList
           todos={displayedTodos}

@@ -2,8 +2,8 @@ export default function TodoItem(props) {
   return (
     <>
       <li>
-        <h2>{props.todo.text}</h2>
-
+        {props.todo.text}
+        [{props.todo.category}]
         {/*
      <h3>this if of com{props.todo.completed.toString()}</h3>
      <pre>{JSON.stringify(props, null, 2)}</pre>
