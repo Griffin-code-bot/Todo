@@ -23,7 +23,10 @@ function App() {
   const [count, setCount] = useState(0);
   const [task, setTask] = useState("");
   const [search, setSearch] = useState("");
+
   const [category, setCategory] = useState("coding");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+
   const [theme, setTheme] = useState( ()=> {
   const savedTheme = localStorage.getItem("theme")
 
@@ -135,6 +138,15 @@ useEffect( ()=> {
 
   displayedTodos = displayedTodos.filter((todo) => todo.text.includes(search));
   
+
+if (categoryFilter !== "all") {
+  displayedTodos = displayedTodos.filter(
+    todo => todo.category === categoryFilter
+  )
+}
+
+
+
   const totalTodos = todos.length
   const completedTodos = todos.filter(
   todo => todo.completed).length
@@ -150,7 +162,11 @@ useEffect( ()=> {
         <Weather />
 
         <h1>Todo App</h1>
-        
+	<button onClick={() => setCategoryFilter("all")}>All</button>
+        <button onClick={() => setCategoryFilter("coding")}>Coding</button>
+	<button onClick={() => setCategoryFilter("life")}>Life</button>
+	<button onClick={() => setCategoryFilter("fitness")}>Fitness</button>
+	<button onClick={() => setCategoryFilter("misc")}>Misc</button>
         <button
           onClick={() =>
             theme == "light" ? setTheme("dark") : setTheme("light")
