@@ -1,15 +1,22 @@
-import "../src/index.css";
+import "../src/index.css" 
 
 export default function TodoItem(props) {
   return (
     <>
       <li>
         {props.todo.text}
-        <span className={props.todo.category}>[{props.todo.category}]</span>
+      <span className={props.todo.category}>
+        [{props.todo.category}]
+      </span>
 
-        <span className={props.todo.priority}>[{props.todo.priority}]</span>
 
-        {/*
+	<span className={props.todo.priority}>
+	[{props.todo.priority}]
+        [{props.todo.dueDate}]
+	</span>
+
+       
+ {/*
      <h3>this if of com{props.todo.completed.toString()}</h3>
      <pre>{JSON.stringify(props, null, 2)}</pre>
 */}
@@ -39,3 +46,5 @@ export default function TodoItem(props) {
     </>
   );
 }
+
+

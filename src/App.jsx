@@ -25,7 +25,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [priority, setPriority] = useState("medium");
 
-
+  const [dueDate, setDueDate] = useState("");
   const [category, setCategory] = useState("coding");
   const [categoryFilter, setCategoryFilter] = useState("all");
 
@@ -56,7 +56,8 @@ return savedTheme
       text: task,
       completed: false,
       category:category,
-      priority: priority
+      priority: priority,
+      dueDate: dueDate
     };
     setTodos([...todos, newTodo]);
     setTask("");
@@ -253,6 +254,11 @@ if (categoryFilter !== "all") {
         <option value="low">Low </option> 
         </select>
  
+       <input type="date" 
+       value={dueDate}
+       onChange={ (e) => setDueDate(e.target.value) }
+
+	/>
         <button onClick={addTodo}>Add</button>
         <TodoList
           todos={displayedTodos}
