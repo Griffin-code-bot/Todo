@@ -3,7 +3,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
 import "./App.css";
-import "./index.css";
+import "./index.css"
 import TodoItem from "../components/TodoItem.jsx";
 import TodoList from "../components/TodoList.jsx";
 import Weather from "../components/Weather.jsx";
@@ -25,17 +25,19 @@ function App() {
   const [search, setSearch] = useState("");
   const [priority, setPriority] = useState("medium");
 
+
   const [category, setCategory] = useState("coding");
   const [categoryFilter, setCategoryFilter] = useState("all");
 
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
+  const [theme, setTheme] = useState( ()=> {
+  const savedTheme = localStorage.getItem("theme")
 
-    if (savedTheme) {
-      return savedTheme;
-    }
-    return "dark";
-  });
+if (savedTheme) {
+return savedTheme
+
+}
+ return "dark"
+});
 
   const [todos, setTodos] = useState(() => {
     const data = localStorage.getItem("todos");
@@ -53,8 +55,8 @@ function App() {
       id: Date.now(),
       text: task,
       completed: false,
-      category: category,
-      priority: priority,
+      category:category,
+      priority: priority
     };
     setTodos([...todos, newTodo]);
     setTask("");
@@ -117,9 +119,12 @@ useEffect( ()=> {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  useEffect( () => {
+   localStorage.setItem("theme", theme)
+}, [theme]);
+
+
+
 
   let displayedTodos;
 
@@ -135,19 +140,24 @@ useEffect( ()=> {
   }
 
   displayedTodos = displayedTodos.filter((todo) => todo.text.includes(search));
+  
 
-  if (categoryFilter !== "all") {
-    displayedTodos = displayedTodos.filter(
-      (todo) => todo.category === categoryFilter,
-    );
-  }
+if (categoryFilter !== "all") {
+  displayedTodos = displayedTodos.filter(
+    todo => todo.category === categoryFilter
+  )
+}
 
-  const totalTodos = todos.length;
-  const completedTodos = todos.filter((todo) => todo.completed).length;
-  const activeTodos = todos.filter((todo) => !todo.completed).length;
 
-  const completionRate =
-    totalTodos === 0 ? 0 : (completedTodos / totalTodos) * 100;
+
+  const totalTodos = todos.length
+  const completedTodos = todos.filter(
+  todo => todo.completed).length
+  const activeTodos = todos.filter(
+  todo => !todo.completed).length
+
+  const completionRate = totalTodos === 0 ? 0 :  
+  (completedTodos/totalTodos)*100 
 
   return (
     <>
@@ -155,11 +165,11 @@ useEffect( ()=> {
         <Weather />
 
         <h1>Todo App</h1>
-        <button onClick={() => setCategoryFilter("all")}>All</button>
+	<button onClick={() => setCategoryFilter("all")}>All</button>
         <button onClick={() => setCategoryFilter("coding")}>Coding</button>
-        <button onClick={() => setCategoryFilter("life")}>Life</button>
-        <button onClick={() => setCategoryFilter("fitness")}>Fitness</button>
-        <button onClick={() => setCategoryFilter("misc")}>Misc</button>
+	<button onClick={() => setCategoryFilter("life")}>Life</button>
+	<button onClick={() => setCategoryFilter("fitness")}>Fitness</button>
+	<button onClick={() => setCategoryFilter("misc")}>Misc</button>
         <button
           onClick={() =>
             theme == "light" ? setTheme("dark") : setTheme("light")
@@ -198,12 +208,23 @@ useEffect( ()=> {
      <Name name="Priya" />
    <p>{JSON.stringify(todos)}</p>      
 */}
-        <pre>{JSON.stringify(todos, null, 2)}</pre>
+     <pre>
+     {JSON.stringify(todos, null, 2)}
+     </pre>
         <p>Total:{totalTodos}</p>
         <p>Completed: {completedTodos}</p>
         <p>Active: {activeTodos}</p>
         <p>Completion: {completionRate.toFixed(1)}% </p>
-        <button onClick={clearCompleted}>Clear complete</button>
+      
+	<div className="progress-bar">
+	<div
+	className="progress-fill"
+	style={{
+	width: `${completionRate}%`
+	}}	 ></div>
+	</div>
+
+	  <button onClick={clearCompleted}>Clear complete</button>
         <p>Current filter:{filter}</p>
         <p>Remaining todos:{remainingTodos}</p>
         <p>{category}</p>
@@ -212,19 +233,26 @@ useEffect( ()=> {
           value={task}
           onChange={(e) => setTask(e.target.value)}
         />
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="coding">Coding</option>
-          <option value="fitness">Fitness</option>
-          <option value="life">Life</option>
-          <option value="misc">Miscellanous</option>
-        </select>
+         <select
+           value={category}
+           onChange= {(e) => setCategory(e.target.value)}
 
-        <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-          <option value="high">High </option>
-          <option value="medium">Medium </option>
-          <option value="low">Low </option>
+	 >
+        <option value="coding">Coding</option>
+        <option value="fitness">Fitness</option>
+        <option value="life">Life</option>
+        <option value="misc">Miscellanous</option>
         </select>
-
+       
+        <select
+        value={priority}
+        onChange= {(e) => setPriority(e.target.value)} 
+	>
+        <option value="high">High </option>
+        <option value="medium">Medium </option>
+        <option value="low">Low </option> 
+        </select>
+ 
         <button onClick={addTodo}>Add</button>
         <TodoList
           todos={displayedTodos}
