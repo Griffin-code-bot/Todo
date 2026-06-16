@@ -7,7 +7,14 @@ export default function TodoItem(props) {
         {props.todo.text}
       <span className={props.todo.category}>
         [{props.todo.category}]
-      </span>       
+      </span>
+
+
+	<span className={props.todo.priority}>
+	[{props.todo.priority}]
+	</span>
+
+       
  {/*
      <h3>this if of com{props.todo.completed.toString()}</h3>
      <pre>{JSON.stringify(props, null, 2)}</pre>
@@ -39,8 +46,4 @@ export default function TodoItem(props) {
   );
 }
 
-{
-  /*
-<p>  {props.todo.completed ? "✅" :" ❌"}</p>
-*/
-}
+

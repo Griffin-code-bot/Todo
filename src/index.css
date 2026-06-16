@@ -141,3 +141,16 @@ code {
 .misc {
   color: brown;
 }
+
+
+.high {
+  color: red;
+}
+
+.medium {
+  color: yellow;
+}
+
+.low {
+  color: green;
+}

@@ -23,6 +23,8 @@ function App() {
   const [count, setCount] = useState(0);
   const [task, setTask] = useState("");
   const [search, setSearch] = useState("");
+  const [priority, setPriority] = useState("medium");
+
 
   const [category, setCategory] = useState("coding");
   const [categoryFilter, setCategoryFilter] = useState("all");
@@ -53,7 +55,8 @@ return savedTheme
       id: Date.now(),
       text: task,
       completed: false,
-      category:category
+      category:category,
+      priority: priority
     };
     setTodos([...todos, newTodo]);
     setTask("");
@@ -230,6 +233,15 @@ if (categoryFilter !== "all") {
         <option value="fitness">Fitness</option>
         <option value="life">Life</option>
         <option value="misc">Miscellanous</option>
+        </select>
+       
+        <select
+        value={priority}
+        onChange= {(e) => setPriority(e.target.value)} 
+	>
+        <option value="high">High </option>
+        <option value="medium">Medium </option>
+        <option value="low">Low </option> 
         </select>
  
         <button onClick={addTodo}>Add</button>
