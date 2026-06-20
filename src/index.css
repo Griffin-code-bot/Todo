@@ -163,3 +163,7 @@ code {
   height: 100%;
   background-color: green;
 }
+
+.overdue {
+  border-left: 4px solid red;
+}

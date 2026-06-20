@@ -18,7 +18,8 @@ function App() {
   const [dueDate, setDueDate] = useState("");
   const [category, setCategory] = useState("coding");
   const [categoryFilter, setCategoryFilter] = useState("all");
-
+  
+ 
   const [theme, setTheme] = useState( ()=> {
   const savedTheme = localStorage.getItem("theme")
 
@@ -136,11 +137,17 @@ if (categoryFilter !== "all") {
   const completionRate = totalTodos === 0 ? 0 :  
   (completedTodos/totalTodos)*100 
 
+
+const today =
+  new Date().toISOString().split("T")[0]
+   
+
   return (
     <>
       <div className={theme}>
         <Weather />
-
+         {today}
+        
         <h1>Todo App</h1>
 	<button onClick={() => setCategoryFilter("all")}>All</button>
         <button onClick={() => setCategoryFilter("coding")}>Coding</button>
